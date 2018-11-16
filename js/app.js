@@ -99,7 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                 `;
 
+                const removeBtn = document.createElement('button');
+                removeBtn.classList.add('btn', 'btn-danger');
+                removeBtn.innerHTML = '<span aria-hidden="true">x</span> Remove';
+                removeBtn.onclick = removeAppointment;
+
+                appointmentHTML.appendChild(removeBtn);
                 appointments.appendChild(appointmentHTML);
+
                 cursor.continue();
              } else {
                  if(!appointments.firstChild) {
@@ -112,6 +119,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     appointmentTitle.innerHTML = 'Manage your appointment';
                  }
              }
+         }
+
+         function removeAppointment(e) {
+            let appointmentId = Number(e.target.parentElement.getAttribute('data-appointment-id'));
+            let transaction = DB.transaction(['appointments'], 'readwrite');
+            let objectStore = transaction.objectStore('appointments');
+            objectStore.delete(appointmentId);
+
+            transaction.oncomplete = function() {
+                e.target.parentElement.remove();
+                
+                if(!appointments.firstChild) {
+                    appointmentTitle.innerHTML = 'Add a new appointment';
+                    const noAppointment = document.createElement('p');
+                    noAppointment.classList.add('text-center');
+                    noAppointment.textContent = 'No prior appointments found';
+                    appointments.appendChild(noAppointment);
+                } else {
+                   appointmentTitle.innerHTML = 'Manage your appointment';
+                }
+            };
          }
      }
 });
