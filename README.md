@@ -8,11 +8,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 You need to clone this repository via SSH or HTTPS link provided by GitHub using terminal :
 ```
-git@github.com:nehasadhvi/PersonalTweets-LocalStorage.git
+git clone git@github.com:nehasadhvi/Appointment-Management.git
 ```
 or
 ```
-git clone https://github.com/nehasadhvi/PersonalTweets-LocalStorage.git
+git clone https://github.com/nehasadhvi/Appointment-Management.git
 ```
 
 Now, after succesfully cloning the repo, to run the application on your local computer you need to open the local repo using VS Code(highly recommended) and use the "Live Server" extention to run the application on pre-defined port by live server.
